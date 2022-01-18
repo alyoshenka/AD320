@@ -57,9 +57,6 @@ keep private key yourself, public key on github account
 
 
 
-
-
-
 ___
 
 ## Basic Developer Tools
@@ -152,3 +149,83 @@ AJAX (Asynchronous JavaScript and XML): allows you to update parts of the DOM wi
 HTTP = stateless: there is no link between two requests being successively carried out on the same connection
 
 HTTP Cookies are added to the workflow, allowing session creation on each HTTP request to share the same context, or the same state: shopping cart or basket
+
+## HTTP
+
+- send over TCP
+
+- simple and human readable
+
+- extensible, with the use of headers
+
+- stateless, but not sessionless. cookies
+
+application layer: abstraction layer that specifies shared communication protocols in a communications network
+
+### HTTP Flow
+
+1. open TCP connection, used to send and recieve
+1. send HTTP message
+
+
+        GET / HTTP/1.1
+        Host: developer.mozilla.org
+        Accept-Language: fr
+
+    - `GET` -> method = operation to perform
+    - ` / ` -> path
+    - ` HTTP/1.1` -> version of the protocol
+    - `Host...Accept-Language: fr` -> headers = additional information
+    - body -> contain resource sent
+
+1. read response from server
+
+        HTTP/1.1 200 OK
+        Date: Sat, 09 Oct 2010 14:28:02 GMT
+        Server: Apache
+        Last-Modified: Tue, 01 Dec 2009 20:18:22 GMT
+        ETag: "51142bc1-7449-479b075b2891b"
+        Accept-Ranges: bytes
+        Content-Length: 29769
+        Content-Type: text/html
+
+        <!DOCTYPE html... (here come the 29769 bytes of the requested web page)
+
+    - `HTTP/1.1` -> version of the protocol
+    - `200` -> status code
+    - `OK` -> status message, not authoritative
+    - `Date...text/html` -> headers
+    - body -> fetched resource
+
+1. close connection or reuse for future requests
+
+### HTTP Caching
+
+optional, but usually desirable
+
+typically limited to GET requests
+
+caching: stores copy of resource (in a more convenient location) and serves it back when requested
+
+shared cache: stores responses for reuse by more than one user
+
+private cache: dedecated to a single user
+
+#### Types
+
+- browser
+- proxy
+- gateway
+- CDN
+- reverse proxy
+- load balancers
+
+### HTTP Cookies
+
+#### Used for:
+
+- session management
+- personalization
+- tracking
+
+sent with every request, so can worsen performance

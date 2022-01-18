@@ -1,0 +1,59 @@
+<!-- simple example, taken from: https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Client-side_web_APIs/Manipulating_documents -->
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple DOM example</title>
+
+    <style>
+        .highlight {
+            color: white;
+            background-color: black;
+            padding: 10px;
+            width: 250px;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <section>
+        <img src="dinosaur.png" alt="A red Tyrannosaurus Rex: A two legged dinosaur standing upright like a human, with small arms, and a large head with lots of sharp teeth.">
+        <p>Here we will add a link to the <a href="https://www.mozilla.org/">Mozilla homepage</a></p>
+    </section>
+    <script>
+        // recommended modern approach
+        // first <a> element in document
+        const link = document.querySelector('a');
+        link.textContent = "MZD";
+        link.href = "google.com";
+
+        const sect = document.querySelector('section');
+        const para = document.createElement('p');
+        para.textContent = "This is a paragraph.";
+        sect.appendChild(para);
+
+        const text = document.createTextNode(" - this is a text node - ");
+        const linkPara = document.querySelector('p');
+        linkPara.appendChild(text);
+
+        sect.appendChild(linkPara);
+        // sect.removeChild(linkPara);
+        // linkPara.parentNode.removeChild(linkPara);
+        linkPara.remove();
+
+        /*
+        para.style.color = 'white';
+        para.style.backgroundColor = 'black';
+        para.style.padding = '10px';
+        para.style.width = '250px';
+        para.style.textAlign = 'center';
+        */
+        para.setAttribute('class', 'highlight');
+    </script>
+</body>
+
+</html>
