@@ -229,3 +229,24 @@ private cache: dedecated to a single user
 - tracking
 
 sent with every request, so can worsen performance
+
+## NodeJS
+
+1. `npm init -y`: init project, 'yes' to all defaults
+    - observe creation of `packages.json`
+1. `npm install knock-knock-jokes`: add a cool package
+    - observe changes to `packages.json` and creation of `node_modules/`
+1. `touch index.js`: create js file
+1. `node index.js`: run the file
+
+Fun Fact! Semicolons are optional in JavaScript.
+
+## Express
+
+Using [this](https://expressjs.com/en/starter/hello-world.html) example
+
+1. `npm install express`: install express server 
+1. copy example code
+1. run `node index.js` to start server
+    - allow through firewall
+1. visit `localhost:3000`
