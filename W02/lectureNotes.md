@@ -229,5 +229,3 @@ private cache: dedecated to a single user
 - tracking
 
 sent with every request, so can worsen performance
-
-tiny test.
