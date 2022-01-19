@@ -201,10 +201,241 @@ uses asynchronous programming
 - collect form data
 - add, delete, modify data in your database
 
-## AJAX
+## Server Side Introduction
 
+- efficient storage and delivery of information
+- customized user experience
+- controlled access to content
+- store session/state information
+- notifications and communication
+- data analysis
 
+allows you to tailor website contend for individual users
+
+dynamic site -> HTML pages normally created by inserting data from a database into placeholders in HTML templates (more efficient)
+
+supporting code -> runs on server, "server-side programming"/"back-end scripting"
+
+client-side code -> HTML, CSS, JavaScript -> appearance and behavior of rendered page; handling different browsers
+
+server-side code PHP, Python, Ruby, C#, NodeJS -> choosing which content is returned in response to requests; validating submitted data; interacting with databases; full access to server OS
+
+web framework: collection of functions, objects, rules, and other code constructs designed to solve common problems, speed up development, and simplify different types of tasks
 
 ## Express
 
-### Basic Routing
+### Express/Node Introduction 
+
+[link](https://developer.mozilla.org/en-US/docs/Learn/Server-side/Express_Nodejs/Introduction)
+
+#### Node Benefits
+
+- great performance
+- just JS
+- new language, so well-designed for current applications
+- npm is cool
+- portable and well-supported
+- active developer community
+
+Use web frameworks for other common web-dev tasks
+
+#### Introducing Express
+
+most popular Node web framework
+
+provides methods to specify what function is called for a particular HTTP verb and URL pattern, methods to specify what template engine is used, where template files are located, and what template to use to render a response
+
+#### "Opinionated" web frameworks
+
+- there is a "right way" to handle any particular task
+- support rapid development in a particular domain
+- less flexible solving problems in other domains
+
+#### "Unopinionated" web frameworks
+
+- fewer restrictions
+- developers can use tools suitable for task, but more difficult to choose tools
+- maybe "too many" choices
+
+#### Modules
+
+module -> library/file, imported with `require('package-name')`
+
+can create your own
+
+expose as additional properties using `exports` object to make available outside module
+
+```js
+// module file
+exports.area = funciton(width) {return width * width; };
+```
+```js
+// app file
+const square = require('./square');
+console.log('area: ' + square.area(4));
+```
+can also export complete objects
+
+#### Asynchronous APIs
+
+asynchronous API -> returns instantly
+
+>Using non-blocking asynchronous APIs is even more important on Node than in the browser because Node is a single-threaded event-driven execution environment.
+
+Callback functions used for when operation has completed
+
+`res.json()` -> send a JSON response
+
+`res.sendFile()` -> send a file
+
+`app.all()` -> called in response to any HTTP method
+
+#### Routers
+
+[example](https://expressjs.com/en/starter/basic-routing.html)
+
+Routing refers to determining how an application responds to a client request to a particular endpoint, which is a URI (or path) and a specific HTTP request method (GET, POST, and so on).
+
+Each route can have one or more handler functions, which are executed when the route is matched.
+
+group route handlers using `express.Router()`
+
+`app.METHOD(PATH, HANDLER)`
+
+- app -> instance of express.
+- METHOD -> HTTP request method, in lowercase.
+- PATH ->  path on the server.
+- HANDLER -> function executed when the route is matched.
+
+```js
+// wiki.js - Wiki route module
+
+const express = require('express');
+const router = express.Router();
+
+// Home page route
+router.get('/', function(req, res) {
+  res.send('Wiki home page');
+});
+
+// About page route
+router.get('/about', function(req, res) {
+  res.send('About this wiki');
+});
+
+module.exports = router;
+```
+```js
+// app.js
+
+const wiki = require('./wiki.js');
+// add the router to the middleware handline path
+app.use('/wiki', wiki);
+```
+
+more stuff on routers [here](https://developer.mozilla.org/en-US/docs/Learn/Server-side/Express_Nodejs/routes)
+
+#### Middleware
+
+[example](https://expressjs.com/en/guide/writing-middleware.html)
+
+used extensitely in Express apps
+
+route functions -> end request-response cycle by returning response to client
+
+middleware -> performs operations then continues on with the stack
+
+called in order declared
+
+usually, middleware called before setting routes (otherwise route handlers can't access middleware functionality)
+
+ONLY difference: middleware has `next()`
+
+#### Handling errors
+
+`(err, req, res, next)`
+
+#### Using databases
+
+first install database driver with npm
+
+1. require driver
+1. connect to database
+1. perform CRUD operations
+
+#### Rendering data (views)
+
+template("view") engine: allow you to specify the structure of an output document in a template, using placeholders for data that will be filled in when a page is generated
+
+### Setting up
+
+Node/Express -> web app creates and runs its own web server
+
+`package.json` -> manages dependencies; everything NPM needs to fetch and run application
+
+#### Adding dependencies
+
+```json
+...
+"licence": "ISC",
+"dependencies": {
+    "express": "^4.17.1"
+},
+"devDependencies":{
+    "eslint": "^7.10.0"
+}
+...
+```
+
+#### Running tasks
+
+can define named scripts in `package.json` and have NPM execute them
+
+used to automate running tests or builds
+
+For example, to define a script to run the eslint development dependency that we specified in the previous section we might add the following script block to our package.json file (assuming that our application source is in a folder /src/js):
+
+```json
+"scripts": {
+  ...
+  "lint": "eslint src/js"
+  ...
+}
+```
+We would then be able to run eslint using NPM by calling: 
+
+```
+npm run lint
+```
+
+`npm install` (from project dir) -> install all dependencies
+
+## AJAX
+
+**A**synchronous **J**avaScript **A**nd **X**ML
+
+NOT a programming language
+
+uses `XMLHttpRequest` and JavaScript/HTML DOM
+
+use XML, JSON, or plain text
+
+- read data from a server after page has loaded
+- update page without reloading
+- send data to server in the background
+
+## Full Stack JS
+
+browser
+
+server
+
+database
+
+## JSON
+
+same form as JS objects
+
+`{}` -> objects
+
+`[]` -> arrays
