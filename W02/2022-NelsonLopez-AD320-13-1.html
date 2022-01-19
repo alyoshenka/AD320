@@ -1,0 +1,1169 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+    "http://www.w3.org/TR/html4/strict.dtd">
+<html><head>
+<title>2022-NelsonLopez-AD320-13-1</title>
+<meta http-equiv="content-type" content="text/html;charset=UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+html {
+  font-family: 'Arial';
+}
+
+body {
+  color: #333;
+  font-weight: 100;
+  max-width: 95%;
+  margin: 0 1em;
+}
+
+div:focus {
+  outline: none;
+}
+
+#heading {
+  font-size: 1.3em;
+  font-weight: bold;
+  padding-top: .5em;
+}
+
+#content {
+  padding-top: .5em;
+  font-size: 1em;
+}
+
+.box0 {
+  vertical-align: text-top;
+  cursor: text;
+  display: inline-block;
+  font-size: 1.1em;
+  border: 1px inset #aaa;
+  width: 95%;
+  margin: 1px;
+  padding: 2px;
+  min-height: 1em;
+  white-space: pre-wrap;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  resize: none;
+}
+
+.hidden {
+  display: none;
+}
+
+.box1 {
+  display:inline-block;
+  width: 90%;
+  vertical-align:top;
+}
+
+.box2 {
+  cursor: text;
+  display:inline-block;
+  font-size: 1.1em;
+  border: 1px inset #aaa;
+  width: 95%;
+  margin: 1px;
+  padding: 2px;
+  min-height: 1em;
+  white-space: pre-wrap;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  resize: none;
+}
+
+.buttonactive {
+  appearance: push-button !important;
+  background-color: SkyBlue;
+}
+</style>
+<script id="mainscript" language="JavaScript" type="text/javascript"><!--
+var idcntr=0;
+var blkid=null;
+var title;
+var values = [];
+var curout = null;
+var evalfn = eval;
+
+
+function pagestartup() {
+  title = decodeURIComponent(document.URL.match(/\/([^\.\/]*)[^\/]*$/)[1]) || 'JS';
+  document.getElementById('heading').innerHTML = title;
+  document.getElementsByTagName("title")[0].innerHTML = title;
+
+  idcntr = 0;
+  while (true) {
+    b = document.getElementById("b"+idcntr);
+    if (b === null) { break; }
+    blk_resizing(b);
+    idcntr++;
+  }
+  document.getElementById("downloader").href = "missing";
+  document.getElementById("downloader").download = "missing";
+}
+
+function textarearesize(ta) {
+  var h,a,y,ny;
+  y = window.pageYOffset;
+  ta.style.height = 'auto';
+  h = ta.scrollHeight;
+  h -= 4; // twice the padding
+  ta.style.height = h+'px';
+  ny = window.pageYOffset;
+  if (ny < y-40 || y+40 < ny) { // no big jumps
+    window.scrollTo(window.pageXoffset,y);
+    setTimeout(function(){ window.scrollTo(window.pageXoffset,y); },60);
+  }
+}
+
+function blkresize(b) {
+  var d,e;
+  d = b.childNodes[1];
+  if (6<=d.childNodes.length) {
+    e = d.childNodes[5];
+    if ("TEXTAREA" === e.nodeName) { textarearesize(e); }
+    if (1<=d.childNodes[6].childNodes.length) {
+      e = d.childNodes[6].childNodes[0];
+      if ("TEXTAREA" === e.nodeName) { textarearesize(e); }
+    }
+  }
+}
+
+function textarea_resizing(ta) {
+  function resize () {
+    textarearesize(ta);
+  }
+  function delayedResize () {
+    window.setTimeout(resize, 0);
+  }
+  ta.addEventListener('change',resize,false);
+  ta.addEventListener('cut',delayedResize,false);
+  ta.addEventListener('paste',delayedResize,false);
+  ta.addEventListener('drop',delayedResize,false);
+  ta.addEventListener('keydown',delayedResize,false);
+  textarearesize(ta);
+}
+
+function blk_resizing(b) {
+  var d,e;
+  d = b.childNodes[1];
+  if (6<=d.childNodes.length) {
+    e = d.childNodes[5];
+    if ("TEXTAREA" === e.nodeName) { textarea_resizing(e); }
+    if (1<=d.childNodes[6].childNodes.length) {
+      e = d.childNodes[6].childNodes[0];
+      if ("TEXTAREA" === e.nodeName) { textarea_resizing(e); }
+    }
+  }
+}
+
+function clear_content(ev,th) {
+  idcntr = 0;
+  blkid = null;
+  values = [];
+  document.getElementById('content').innerHTML = "";
+}
+
+function toggle_rw(ev,th) {
+  var c;
+  c = document.getElementById('content');
+  if ("true" === c.contentEditable) {
+    c.contentEditable = false;
+    document.getElementById('RORW').value = "RO>RW";
+  } else {
+    c.contentEditable = true;
+    document.getElementById('RORW').value = "RW>RO";
+  }
+}
+
+function add_block(ev,th) {
+  var txt,d,c,idnum,x;
+  c = document.getElementById('content');
+  idnum = idcntr;
+  idcntr++;
+txt = '['+idnum+']:&nbsp;<span class="box1">\
+<input type="button" value="go" onclick="button_flash(go_block,event,this);" class="">\
+<input type="button" value="txt" onclick="show_block(event,this);">\
+<input type="button" value="clr" onclick="clr_block(event,this);">\
+<input type="button" value="-" onclick="vis_block(event,this);"><br>\
+<textarea id="b'+idnum+'_in" class="box0" rows=1 cols=110></textarea>\
+<div></div></span>';
+  d = document.createElement("DIV");
+  d.id = "b"+idnum;
+  d.innerHTML = txt;
+  c.appendChild(d);
+  x=document.createElement("P");
+  x.style = "margin: .75em";
+  c.appendChild(x);
+  values[idnum] = undefined;
+  blk_resizing(d);
+  d.childNodes[1].childNodes[5].focus();
+  return undefined;
+}
+
+function deletelast_block(ev,th) {
+  var d,gid,aid;
+  d = document.getElementById('content');
+  if (null === d.lastChild) { return; }
+  idcntr--;
+  gid = "b"+idcntr;
+  while (1) {
+    aid = d.lastChild.id;
+    d.removeChild(d.lastChild);
+    if (gid === aid) { break; }
+  }
+  values[idcntr] = undefined;
+}
+
+function put(s) {
+  if (null === curout) {
+    console.log(s);
+  } else {
+    curout.value += s;
+    textarearesize(curout);
+  }
+  return s;
+}
+
+function eval_script(scr) {
+  var val,errmsg;
+  try {
+    val = evalfn(scr);
+  } catch (errmsg) {
+    val = "Error: " + errmsg;
+  }
+  return val;
+}
+
+function eval_block(blk) {
+  var scr,val,e,x,b,d;
+  scr = blk.childNodes[1].childNodes[5].value;
+  blkid = blk.id;
+  d = blk.childNodes[1].childNodes[6];
+  if (1<=d.childNodes.length && d.childNodes[0].id === undefined) {
+    d.innerHTML = "";
+  }
+  if (d.childNodes.length<1) {
+    x = document.createElement("TEXTAREA");
+    x.id = blkid + "_val";
+    x.className = "box2";
+    x.rows = 1;
+    x.cols = 110;
+    d.appendChild(x);
+    textarea_resizing(x);
+  } else {
+    x = d.childNodes[0];
+  }
+  x.value = "";
+  textarearesize(x)
+  curout = x;
+  val = eval_script(scr);
+  x.value += val;
+  textarearesize(x)
+  b = +(blkid.replace(/^b/,""));
+  values[b] = val;
+  return undefined;
+}
+
+function button_flash(fn,ev,th) {
+  th.className = "buttonactive";
+  setTimeout(function() { fn(ev,th); }, 20);
+}
+
+function button_active(th) { th.className = "buttonactive"; }
+function button_reset(th) { th.className = ""; }
+
+function go_block(ev,th) {
+  var blk,txt,d;
+  blk = th.parentNode.parentNode;
+  eval_block(blk);
+  button_reset(th);
+}
+
+function golast_block(ev,th) {
+  var blk,txt,d;
+  blk = document.getElementById("b"+(idcntr-1));
+  if (null === blk) {
+    button_reset(th);
+    return;
+  }
+  eval_block(blk);
+  button_reset(th);
+}
+
+function goadd_block(ev,th) {
+  golast_block(ev,th);
+  add_block(ev,th);
+}
+
+function show_block(ev,th) {
+  var txt,d;
+  txt = th.parentNode.childNodes[5].value;
+  d = th.parentNode.childNodes[6];
+  d.innerHTML = txt;
+  return undefined;
+}
+
+function clr_block(ev,th) {
+  var t,d,x,p;
+  d = th.parentNode.childNodes[6];
+  if (1<=d.childNodes.length && (d.childNodes[0].id === "" || d.childNodes[0].id === undefined)) {
+    d.innerHTML = "";
+  }
+  if (d.childNodes.length<1) {
+    x = document.createElement("TEXTAREA");
+    x.id = blkid + "_val";
+    x.className = "box2";
+    x.rows = 1;
+    x.cols = 110;
+    d.appendChild(x);
+  } else {
+    x = d.childNodes[0];
+  }
+  x.value = "";
+  textarearesize(x);
+  p = th.parentNode;
+  t = p.childNodes[5];
+  t.className = "box0";
+  p.childNodes[0].className = "";
+  p.childNodes[1].className = "";
+  p.childNodes[2].className = "";
+  p.childNodes[3].value = "-";
+}
+
+function vis_block(ev,th) {
+  var t,p;
+  p = th.parentNode;
+  t = p.childNodes[5];
+  if ("box0" === t.className) {
+    t.className = "hidden";
+    p.childNodes[0].className = "hidden";
+    p.childNodes[1].className = "hidden";
+    p.childNodes[2].className = "hidden";
+    p.childNodes[3].value = "+";
+  } else {
+    t.className = "box0";
+    p.childNodes[0].className = "";
+    p.childNodes[1].className = "";
+    p.childNodes[2].className = "";
+    p.childNodes[3].value = "-";
+  }
+  blkresize(p.parentNode);
+}
+
+function str(n) {
+  var e;
+  e = document.getElementById("b"+n+"_val");
+  if (null === e) {
+    e = document.getElementById("b"+n);
+    if (null === e) {
+      return "";
+    } else {
+      return e.childNodes[1].childNodes[5].value;
+    }
+  } else {
+    return e.value;
+  }
+}
+
+function res(n) {
+  var e,v;
+  if (undefined === values[n]) {
+    e = document.getElementById("b"+n+"_val");
+    if (null === e) {
+      return "";
+    } else {
+      v = e.value;
+    }
+    if ("" !== v) {
+      if (isNaN(+v)) {
+        return v;
+      }
+      else {
+        return +v;
+      }
+    } else {
+      return "";
+    }
+  }
+  return values[n];
+}
+
+function expr(n) {
+  var e;
+  e = document.getElementById("b"+n);
+  if (null === e) {
+    return ""
+  } else {
+    return e.childNodes[1].childNodes[5].value;
+  }
+}
+
+function last() {
+  var b;
+  if (null === blkid) { return null; }
+  b = blkid.replace(/^b/,"");
+  return res(b-1);
+}
+
+function final() {
+  return values[idcntr-1];
+}
+
+function store_content(ev,th) {
+  var fn,p,save_link,b;
+  update_all();
+  save_link = document.getElementById("downloader");
+  if ("missing" !== save_link.href) {
+    window.URL.revokeObjectURL(save_link.href);
+    save_link.href = "missing";
+  }
+  save_link.download = "missing";
+  fn = document.URL.match(/\/([^\/]*)$/)[1];
+  b = window.document.documentElement.outerHTML;
+  p = '<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"\n    "http://www.w3.org/TR/html4/strict.dtd">\n' + b;
+  p = p.replace(/\n\n\n+<\/body><\/html>/,"\n\n</body></html>");
+  blob = new Blob([String.fromCharCode(0xFEFF),p],{type: "text/html;charset=" + document.characterSet});
+  save_link.href = window.URL.createObjectURL(blob);
+  save_link.download = fn;
+}
+
+function write_doc(txt) {
+  var b;
+  document.open();
+  document.write(txt);
+  document.close();
+  idcntr = 0;
+  while (true) {
+    b = document.getElementById("b"+idcntr);
+    if (b === null) { break; }
+    blk_resizing(b);
+    idcntr++;
+  }
+  blkid = null;
+  values = [];
+}
+
+function restore_content(ev,th) {
+  var rdr
+  if (undefined === window.blob) return;
+  rdr = new FileReader();
+  rdr.addEventListener("loadend",function(e) { write_doc(e.srcElement.result) });
+  rdr.readAsText(blob);
+}
+
+function do_all(ev,th) {
+  var blk,txt,d,index,v;
+  for (index=0; index<idcntr; index++) {
+    blk = document.getElementById("b"+index);
+    if (null === blk) { continue; }
+    d = blk.childNodes[1].childNodes[5];
+    txt = d.value;
+    v = document.getElementById("b"+index+"_val");
+    if (! txt.match(/^</) || (null != v && "TEXTAREA" === v.nodeName)) {
+      eval_block(blk);
+    } else {
+      d.parentNode.childNodes[6].innerHTML = txt;
+    }
+  }
+  button_reset(th);
+}
+
+function update_all() {
+  var blk,d,index,v;
+  for (index=0; index<idcntr; index++) {
+    blk = document.getElementById("b"+index);
+    if (null === blk) { continue; }
+    d = blk.childNodes[1].childNodes[5];
+    d.textContent = d.value;
+    v = document.getElementById("b"+index+"_val");
+    if (null != v && "TEXTAREA" === v.nodeName) {
+      v.textContent = v.value;
+    }
+  }
+}
+--></script>
+</head>
+<body>
+
+<span id="heading" style="display:inline-block;margin-bottom: .5em;">2022-NelsonLopez-AD320-13-1</span>
+
+<span style="display:inline-block;float:right;margin-top: .8em;">
+<input id="RORW" type="button" value="RW>RO" onclick="toggle_rw(event,this);">
+<input type="button" value="clear" onclick="clear_content(event,this);">
+<input type="button" value="store" onclick="store_content(event,this);">
+<input type="button" value="restore" onclick="restore_content(event,this);">
+<a id="downloader" href="missing" download="missing" target="_blank"><input type="button" value="save" onclick="store_content(event,this);"></a>
+</span>
+<br>
+
+<input type="button" value="add" onclick="add_block(event,this);" style="margin-top: .8em; margin-bottom: .5em;">
+
+<div id="content" contenteditable="true"><div id="b0">[0]:&nbsp;<span class="box1"><input type="button" value="go" onclick="button_flash(go_block,event,this);" class="hidden"><input type="button" value="txt" onclick="show_block(event,this);" class="hidden"><input type="button" value="clr" onclick="clr_block(event,this);" class="hidden"><input type="button" value="+" onclick="vis_block(event,this);"><br><textarea id="b0_in" class="hidden" rows="1" cols="110" style="height: auto;">&lt;style&gt;
+
+header{background-color: #005588; color: white; text-align:center;} 
+footer{background-color:red; color:white;} 
+main {background-color: #bbd6ef; padding: 5%; border: 25px solid #005588;} 
+p {padding-left: 0.5em; padding-right: 0.5em; font-size:1.5em;}
+.tooltip {
+  position: relative;
+  display: inline-block;
+  border-bottom: 1px dotted black;
+}
+
+.tooltip .tooltiptext {
+  visibility: hidden;
+  width: 20em;
+  background-color: black;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px 0;
+
+  /* Position the tooltip */
+  position: absolute;
+  z-index: 1;
+  bottom: 100%;
+  
+  
+ 
+  left: 50%;
+  margin-left: -3em; /* Use half of the width (120/2 = 60), to center the tooltip */
+}
+
+.tooltip:hover .tooltiptext {
+  visibility: visible;
+}
+
+&lt;/style&gt;
+&lt;title&gt;Week One&lt;/title&gt;
+&lt;body&gt;</textarea><div><style>
+
+header{background-color: #005588; color: white; text-align:center;} 
+footer{background-color:red; color:white;} 
+main {background-color: #bbd6ef; padding: 5%; border: 25px solid #005588;} 
+p {padding-left: 0.5em; padding-right: 0.5em; font-size:1.5em;}
+.tooltip {
+  position: relative;
+  display: inline-block;
+  border-bottom: 1px dotted black;
+}
+
+.tooltip .tooltiptext {
+  visibility: hidden;
+  width: 20em;
+  background-color: black;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px 0;
+
+  /* Position the tooltip */
+  position: absolute;
+  z-index: 1;
+  bottom: 100%;
+  
+  
+ 
+  left: 50%;
+  margin-left: -3em; /* Use half of the width (120/2 = 60), to center the tooltip */
+}
+
+.tooltip:hover .tooltiptext {
+  visibility: visible;
+}
+
+</style>
+<title>Week One</title>
+</div></span></div><p style="margin: 0.75em;"></p><div id="b1">[1]:&nbsp;<span class="box1"><input type="button" value="go" onclick="button_flash(go_block,event,this);" class="hidden"><input type="button" value="txt" onclick="show_block(event,this);" class="hidden"><input type="button" value="clr" onclick="clr_block(event,this);" class="hidden"><input type="button" value="+" onclick="vis_block(event,this);"><br><textarea id="b1_in" class="hidden" rows="1" cols="110" style="height: auto;">&lt;main&gt;  &lt;header&gt;
+    &lt;h1&gt;Week One Representing the Web&lt;/h1&gt;
+    &lt;p&gt;What is the Web? or the WWW?&lt;/p&gt;&lt;p&gt;What is a server?&lt;/p&gt;&lt;p&gt;What is fullstack&lt;/p&gt;&lt;p&gt;what is a client?&lt;/p&gt;
+  &lt;/header&gt;
+
+  &lt;p&gt;How to build websites?.&lt;/p&gt;
+  &lt;p&gt;How to build apps?.&lt;/p&gt;
+  &lt;p&gt;How to render websites and apps?.&lt;/p&gt;&lt;p&gt;what is HTTP?&lt;/p&gt;&lt;p&gt;What is asynchronous?&lt;/p&gt;&lt;p&gt;what is the DOM?&lt;/p&gt;
+&lt;/main&gt;
+&lt;footer&gt;But first a detour which is not... really ....&lt;/footer&gt;
+</textarea><div><main>  <header>
+    <h1>Week One Representing the Web</h1>
+    <p>What is the Web? or the WWW?</p><p>What is a server?</p><p>What is fullstack</p><p>what is a client?</p>
+  </header>
+
+  <p>How to build websites?.</p>
+  <p>How to build apps?.</p>
+  <p>How to render websites and apps?.</p><p>what is HTTP?</p><p>What is asynchronous?</p><p>what is the DOM?</p>
+</main>
+<footer>But first a detour which is not... really ....</footer>
+</div></span></div><p style="margin: 0.75em;"></p><div id="b2">[2]:&nbsp;<span class="box1"><input type="button" value="go" onclick="button_flash(go_block,event,this);" class="hidden"><input type="button" value="txt" onclick="show_block(event,this);" class="hidden"><input type="button" value="clr" onclick="clr_block(event,this);" class="hidden"><input type="button" value="+" onclick="vis_block(event,this);"><br><textarea id="b2_in" class="hidden" rows="1" cols="110" style="height: auto;">&lt;main&gt;&lt;h2&gt;Semantic HTML Tags&lt;/h2&gt;
+&lt;pre&gt;
+&amp;ltarticle&gt;
+&amp;ltaside&gt;
+&amp;ltdetails&gt;
+&amp;ltfigcaption&gt;
+&amp;ltfigure&gt;
+&amp;ltfooter&gt;
+&amp;ltheader&gt;
+&amp;ltmain&gt;
+&amp;ltmark&gt;
+&amp;ltnav&gt;
+&amp;ltsection&gt;
+&amp;ltsummary&gt;
+&amp;lttime&gt;
+&lt;/pre&gt;&lt;/main&gt;</textarea><div><main><h2>Semantic HTML Tags</h2>
+<pre>&lt;article&gt;
+&lt;aside&gt;
+&lt;details&gt;
+&lt;figcaption&gt;
+&lt;figure&gt;
+&lt;footer&gt;
+&lt;header&gt;
+&lt;main&gt;
+&lt;mark&gt;
+&lt;nav&gt;
+&lt;section&gt;
+&lt;summary&gt;
+&lt;time&gt;
+</pre></main></div></span></div><p style="margin: 0.75em;"></p><div id="b3">[3]:&nbsp;<span class="box1"><input type="button" value="go" onclick="button_flash(go_block,event,this);" class="hidden"><input type="button" value="txt" onclick="show_block(event,this);" class="hidden"><input type="button" value="clr" onclick="clr_block(event,this);" class="hidden"><input type="button" value="+" onclick="vis_block(event,this);"><br><textarea id="b3_in" class="hidden" rows="1" cols="110" style="height: auto;">&lt;main&gt;&lt;figure&gt;
+  &lt;img src="img_sem_elements.gif" alt="Semantic"&gt;
+  &lt;figcaption&gt;Fig1.Semantic Elements&lt;/figcaption&gt;
+&lt;a href="https://www.w3schools.com/html/html5_semantic_elements.asp"&gt;https://www.w3schools.com/html/html5_semantic_elements.asp&lt;/a&gt;
+&lt;/figure&gt;&lt;/main&gt;</textarea><div><main><figure>
+  <img src="img_sem_elements.gif" alt="Semantic">
+  <figcaption>Fig1.Semantic Elements</figcaption>
+<a href="https://www.w3schools.com/html/html5_semantic_elements.asp">https://www.w3schools.com/html/html5_semantic_elements.asp</a>
+</figure></main></div></span></div><p style="margin: 0.75em;"></p><div id="b4">[4]:&nbsp;<span class="box1"><input type="button" value="go" onclick="button_flash(go_block,event,this);" class="hidden"><input type="button" value="txt" onclick="show_block(event,this);" class="hidden"><input type="button" value="clr" onclick="clr_block(event,this);" class="hidden"><input type="button" value="+" onclick="vis_block(event,this);"><br><textarea id="b4_in" class="hidden" rows="1" cols="110" style="height: auto;">&lt;main&gt;&lt;section&gt;&lt;h2&gt;Who Am I?&lt;/h2&gt;&lt;/section&gt;
+&lt;ul&gt;&lt;li&gt;I like to think of myself as a Big Data Scientist&lt;/li&gt;&lt;li&gt;Instructor at Edmonds and other various Colleges&lt;/li&gt;&lt;li&gt;Master in CS from University of Miami&lt;/li&gt;
+&lt;article&gt;&lt;h3&gt;My contact info:&lt;/h3&gt;&lt;/article&gt;&lt;main&gt;</textarea><div><main><section><h2>Who Am I?</h2></section>
+<ul><li>I like to think of myself as a Big Data Scientist</li><li>Instructor at Edmonds and other various Colleges</li><li>Master in CS from University of Miami</li>
+<article><h3>My contact info:</h3></article><main></main></ul></main></div></span></div><p style="margin: 0.75em;"></p><div id="b5">[5]:&nbsp;<span class="box1"><input type="button" value="go" onclick="button_flash(go_block,event,this);" class="hidden"><input type="button" value="txt" onclick="show_block(event,this);" class="hidden"><input type="button" value="clr" onclick="clr_block(event,this);" class="hidden"><input type="button" value="+" onclick="vis_block(event,this);"><br><textarea id="b5_in" class="hidden" rows="1" cols="110" style="height: auto;">&lt;main&gt;&lt;header&gt;&lt;h1&gt;CANVAS Tour&lt;/h1&gt;&lt;/header&gt;&lt;/main&gt;</textarea><div><main><header><h1>CANVAS Tour</h1></header></main></div></span></div><p style="margin: 0.75em;"></p><div id="b6">[6]:&nbsp;<span class="box1"><input type="button" value="go" onclick="button_flash(go_block,event,this);" class="hidden"><input type="button" value="txt" onclick="show_block(event,this);" class="hidden"><input type="button" value="clr" onclick="clr_block(event,this);" class="hidden"><input type="button" value="+" onclick="vis_block(event,this);"><br><textarea id="b6_in" class="hidden" rows="1" cols="110" style="height: auto;">&lt;main&gt;&lt;header&gt;&lt;h1&gt;Syllabus Review: Goals&lt;/h1&gt;&lt;/header&gt;
+
+&lt;article&gt;
+&lt;p&gt;This is an intermediate course in developing a database-driven Web application incorporating MVC patterns. The course covers state maintenance, CRUD and REST integration on both server and client side. Students parse, cache and integrate API data achieved by third party providers into their application. Technologies can include jQuery, CURL, AJAX and parsing JSON and XML. Students explore legal and ethical issues that are specific to the Web application environment, such as security and privacy of information and how Web applications bring benefits as well as unintended consequences.&lt;/p&gt;&lt;/article&gt;
+&lt;article&gt;&lt;ul&gt;&lt;li&gt;Grading Policy&lt;/li&gt;&lt;li&gt;Submission procedure (and late submission penalties)&lt;/li&gt;&lt;li&gt;How to ask for help&lt;/li&gt;&lt;li&gt;Sharing code or ideas?&lt;/li&gt;&lt;li&gt;Collaboration and other soft skills&lt;/li&gt;&lt;/ul&gt;&lt;/article&gt;
+
+&lt;/main&gt;</textarea><div><main><header><h1>Syllabus Review: Goals</h1></header>
+
+<article>
+<p>This is an intermediate course in developing a database-driven Web application incorporating MVC patterns. The course covers state maintenance, CRUD and REST integration on both server and client side. Students parse, cache and integrate API data achieved by third party providers into their application. Technologies can include jQuery, CURL, AJAX and parsing JSON and XML. Students explore legal and ethical issues that are specific to the Web application environment, such as security and privacy of information and how Web applications bring benefits as well as unintended consequences.</p></article>
+<article><ul><li>Grading Policy</li><li>Submission procedure (and late submission penalties)</li><li>How to ask for help</li><li>Sharing code or ideas?</li><li>Collaboration and other soft skills</li></ul></article>
+
+</main></div></span></div><p style="margin: 0.75em;"></p><div id="b7">[7]:&nbsp;<span class="box1"><input type="button" value="go" onclick="button_flash(go_block,event,this);" class="hidden"><input type="button" value="txt" onclick="show_block(event,this);" class="hidden"><input type="button" value="clr" onclick="clr_block(event,this);" class="hidden"><input type="button" value="+" onclick="vis_block(event,this);"><br><textarea id="b7_in" class="hidden" rows="1" cols="110" style="height: auto;">&lt;main&gt;&lt;header&gt;&lt;h1&gt;What are we?&lt;/h1&gt;&lt;h2&gt;Developers!!!&lt;/h2&gt;&lt;h1&gt;What do we want?&lt;/h1&gt;&lt;h2&gt;Coding!!!&lt;/h2&gt;&lt;h1&gt;When do we want it?&lt;/h1&gt;&lt;h2&gt;Now!!!&lt;/h2&gt;&lt;/header&gt;
+
+&lt;p&gt;Lectures on Wednesdays&lt;/p&gt;&lt;p&gt;Asynchronous reading and viewing&lt;/p&gt;&lt;p&gt;Individual assignments&lt;/p&gt;&lt;p&gt;Group assignments&lt;/p&gt;&lt;p&gt;Collaboration&lt;/p&gt;
+
+&lt;/main&gt;</textarea><div><main><header><h1>What are we?</h1><h2>Developers!!!</h2><h1>What do we want?</h1><h2>Coding!!!</h2><h1>When do we want it?</h1><h2>Now!!!</h2></header>
+
+<p>Lectures on Wednesdays</p><p>Asynchronous reading and viewing</p><p>Individual assignments</p><p>Group assignments</p><p>Collaboration</p>
+
+</main></div></span></div><p style="margin: 0.75em;"></p><div id="b8">[8]:&nbsp;<span class="box1"><input type="button" value="go" onclick="button_flash(go_block,event,this);" class="hidden"><input type="button" value="txt" onclick="show_block(event,this);" class="hidden"><input type="button" value="clr" onclick="clr_block(event,this);" class="hidden"><input type="button" value="+" onclick="vis_block(event,this);"><br><textarea id="b8_in" class="hidden" rows="1" cols="110" style="height: auto;">&lt;main&gt;&lt;header&gt;&lt;h2&gt;Web Fundamentals&lt;/h2&gt;&lt;h1&gt;The Browser&lt;/h1&gt;&lt;li&gt;How many?&lt;/li&gt;&lt;li&gt;Are all the same?&lt;/li&gt;&lt;li&gt;how about functionality?&lt;/li&gt;&lt;/header&gt;
+
+&lt;p&gt;Browsers are the most common software used in the world&lt;/p&gt;&lt;p&gt;The browser is responsible for three things:&lt;ol&gt;&lt;li&gt;Making network requests&lt;/li&gt;&lt;li&gt;Displaying the content and accepting user input (UI)&lt;/li&gt;&lt;li&gt;Storing Data&lt;/li&gt;&lt;/ol&gt;&lt;/p&gt;&lt;p&gt;The Document Object Model (DOM) is a representation of the web page in the browser memory, a tree structure representing the elements in a web page&lt;/p&gt;&lt;p&gt;The DOM is the backend structure. The Render Tree is the other end, what the browser uses to paint the web page on your screen&lt;/p&gt;&lt;p&gt;React (and other JS libraries) let us modify the DOm to create effects and respond to user input&lt;/p&gt;&lt;p&gt;Collaboration&lt;/p&gt;&lt;/main&gt;
+</textarea><div><main><header><h2>Web Fundamentals</h2><h1>The Browser</h1><li>How many?</li><li>Are all the same?</li><li>how about functionality?</li></header>
+
+<p>Browsers are the most common software used in the world</p><p>The browser is responsible for three things:</p><ol><li>Making network requests</li><li>Displaying the content and accepting user input (UI)</li><li>Storing Data</li></ol><p></p><p>The Document Object Model (DOM) is a representation of the web page in the browser memory, a tree structure representing the elements in a web page</p><p>The DOM is the backend structure. The Render Tree is the other end, what the browser uses to paint the web page on your screen</p><p>React (and other JS libraries) let us modify the DOm to create effects and respond to user input</p><p>Collaboration</p></main>
+</div></span></div><p style="margin: 0.75em;"></p><div id="b9">[9]:&nbsp;<span class="box1"><input type="button" value="go" onclick="button_flash(go_block,event,this);" class="hidden"><input type="button" value="txt" onclick="show_block(event,this);" class="hidden"><input type="button" value="clr" onclick="clr_block(event,this);" class="hidden"><input type="button" value="+" onclick="vis_block(event,this);"><br><textarea id="b9_in" class="hidden" rows="1" cols="110" style="height: auto;">&lt;main&gt;&lt;header&gt;&lt;h2&gt;week 01:&lt;/h2&gt;&lt;h1&gt;Weeks 1 Words&lt;/h1&gt;&lt;/header&gt;
+&lt;p class="tooltip"&gt;PROTOCOL&lt;span class="tooltiptext"&gt;is a set of rules that defines a format. It is a system of rules that define how data is exchanged within or between computers. Communications require agreement on the format of the data that is being exchanged.&lt;/span&gt;
+&lt;/p&gt;&lt;p class="tooltip"&gt;Caching&lt;span class="tooltiptext"&gt; is a technique that stores a copy of a given resource and serves it back when requested. When a web cache has a requested resource in its store, it intercepts the request and returns a copy of the stored resource instead of re-downloading the resource from the originating server.&lt;/span&gt; &lt;/p&gt;&lt;p class='tooltip'&gt;AJAX&lt;span class='tooltiptext'&gt;It allows you to update parts of the DOM without the need for a full page refresh. Ajax also lets you work asynchronously, meaning your code continues to run while the targeted part of your web page is trying to reload (compared to synchronously, which blocks your code from running until that part of your page is done reloading).Ajax is gradually being replaced by the official Fetch API Standard.&lt;/span&gt;
+&lt;/p&gt;&lt;p class='tooltip'&gt;AJA&lt;span class='tooltiptext'&gt;&lt;/span&gt;
+&lt;/p&gt;&lt;p class='tooltip'&gt;AJAX&lt;span class='tooltiptext'&gt;&lt;/span&gt;
+&lt;/p&gt;&lt;p class='tooltip'&gt;AJAX&lt;span class='tooltiptext'&gt;&lt;/span&gt;
+&lt;/p&gt;&lt;p class='tooltip'&gt;TOPIC&lt;span class='tooltiptext'&gt;&lt;/span&gt;
+
+&lt;/main&gt;
+
+
+</textarea><div><main><header><h2>week 01:</h2><h1>Weeks 1 Words</h1></header>
+<p class="tooltip">PROTOCOL<span class="tooltiptext">is a set of rules that defines a format. It is a system of rules that define how data is exchanged within or between computers. Communications require agreement on the format of the data that is being exchanged.</span>
+</p><p class="tooltip">Caching<span class="tooltiptext"> is a technique that stores a copy of a given resource and serves it back when requested. When a web cache has a requested resource in its store, it intercepts the request and returns a copy of the stored resource instead of re-downloading the resource from the originating server.</span> </p><p class="tooltip">AJAX<span class="tooltiptext">It allows you to update parts of the DOM without the need for a full page refresh. Ajax also lets you work asynchronously, meaning your code continues to run while the targeted part of your web page is trying to reload (compared to synchronously, which blocks your code from running until that part of your page is done reloading).Ajax is gradually being replaced by the official Fetch API Standard.</span>
+</p><p class="tooltip">AJA<span class="tooltiptext"></span>
+</p><p class="tooltip">AJAX<span class="tooltiptext"></span>
+</p><p class="tooltip">AJAX<span class="tooltiptext"></span>
+</p><p class="tooltip">TOPIC<span class="tooltiptext"></span>
+
+</p></main>
+
+
+</div></span></div><p style="margin: 0.75em;"></p><div id="b10">[10]:&nbsp;<span class="box1"><input type="button" value="go" onclick="button_flash(go_block,event,this);" class="hidden"><input type="button" value="txt" onclick="show_block(event,this);" class="hidden"><input type="button" value="clr" onclick="clr_block(event,this);" class="hidden"><input type="button" value="+" onclick="vis_block(event,this);"><br><textarea id="b10_in" class="hidden" rows="1" cols="110" style="height: auto;">&lt;header&gt;&lt;h1&gt;Syllabus&lt;/h1&gt;&lt;/header&gt;
+&lt;article&gt;&lt;ul&gt;&lt;li&gt;Grading&lt;/li&gt;&lt;li&gt;Submission &lt;/li&gt;&lt;li&gt;How&lt;/li&gt;&lt;li&gt;Sharing&lt;/li&gt;&lt;li&gt;Collaboration&lt;/li&gt;&lt;/ul&gt;&lt;/article&gt;</textarea><div><textarea id="b0_val" class="box2" rows="1" cols="110" style="height: 26px;"></textarea></div></span></div><p style="margin: 0.75em;"></p><div id="b11">[11]:&nbsp;<span class="box1"><input type="button" value="go" onclick="button_flash(go_block,event,this);" class="hidden"><input type="button" value="txt" onclick="show_block(event,this);" class="hidden"><input type="button" value="clr" onclick="clr_block(event,this);" class="hidden"><input type="button" value="+" onclick="vis_block(event,this);"><br><textarea id="b11_in" class="hidden" rows="1" cols="110" style="height: auto;">&lt;style&gt;summary {display: flex; justify-content: space-around; font-size:1.15em;} 
+summary div {width:25%; height:50px;border: 10px solid red; text-align:center; margin:5px;} 
+.three {display:flex; justify-content:space-between;width:100%; height:50px; margin:0;} 
+.three div {margin-left:10px;} 
+.fourth {display:flex; margin-left:15px; padding-top:5px;} 
+fourth div {margin-left:10px; margin-top:10;  } 
+.fifth {display:flex; justify-content:end;}
+.fifth div {width:150px; padding-top:45px; margin:15px;}
+svg {stroke:rgb(255,0,0); stroke-width:10px; margin-top: 0;}
+#svg1 {margin-left:20%; width:20%; height:20%; stroke-width:10px; stroke:rgb(255,0,0);}
+#svg2 {margin-right:20%; width:20%; height:20%;}
+
+#between3and4 {margin-top:25px;}
+
+aside {display:flex; justify-content: space-around; }
+&lt;/style&gt;
+&lt;body&gt;
+&lt;main&gt;
+&lt;summary&gt;&lt;div&gt;document window root&lt;/div&gt;&lt;/summary&gt;
+
+&lt;aside&gt;
+&lt;svg id='svg1' style='width: 20%; height: 20px;'&gt;
+    &lt;line x1="0" y1="100%" x2="100%" y2="0"/&gt;
+&lt;/svg&gt;
+
+&lt;svg id='svg2' style='width: 20%; height: 20px;'&gt;
+    &lt;line x1="0" y1="0" x2="100%" y2="100%"/&gt;
+&lt;/aside&gt;
+
+&lt;summary&gt;&lt;div&gt;Head&lt;/div&gt;&lt;div&gt;Body&lt;/div&gt;&lt;/summary&gt;
+
+&lt;aside&gt;
+&lt;svg id='svg3' style='width: 20%; height: 20px;'&gt;
+    &lt;line x1="0" y1="100%" x2="100%" y2="0"/&gt;
+&lt;/svg&gt;
+
+&lt;svg id='svg4' style='width: 20%; height: 20px;'&gt;
+    &lt;line x1="0" y1="0" x2="100%" y2="100%"/&gt;
+&lt;/svg&gt;
+
+&lt;svg id='svg5' style='width: 20%; height: 20px;'&gt;
+    &lt;line x1="0" y1="100%" x2="100%" y2="0"/&gt;
+&lt;/svg&gt;
+
+&lt;svg id='svg6' style='width: 20%; height: 20px;'&gt;
+    &lt;line x1="0" y1="0" x2="100%" y2="100%"/&gt;
+&lt;/svg&gt;
+&lt;/aside&gt;
+
+&lt;summary class='three'&gt;&lt;div&gt;title&lt;/div&gt;&lt;div&gt;meta&lt;/div&gt;&lt;div&gt;link&lt;/div&gt;&lt;div&gt;&amp;lta&gt; tag&lt;/div&gt;&lt;div&gt;main&lt;/div&gt;&lt;div&gt;img&lt;/div&gt;&lt;/summary&gt;
+
+&lt;aside id="between3and4"&gt;
+&lt;svg id='svg7' style='width: 10%; height: 20px;'&gt;
+    &lt;line x1="0" y1="100%" x2="100%" y2="0"/&gt;
+&lt;/svg&gt;
+
+&lt;svg id='svg8' style='width: 10%; height: 20px;'&gt;
+    &lt;line x1="0" y1="0" x2="100%" y2="100%"/&gt;
+&lt;/svg&gt;
+
+&lt;svg id='svg9' style='width: 10%; height: 20px;'&gt;
+    &lt;line x1="0" y1="100%" x2="100%" y2="0"/&gt;
+&lt;/svg&gt;
+
+&lt;svg id='svga' style='width: 10%; height: 20px;'&gt;
+    &lt;line x1="0" y1="0" x2="100%" y2="100%"/&gt;
+&lt;/svg&gt;
+&lt;svg id='svgb' style='width: 10%; height: 20px;'&gt;
+    &lt;line x1="0" y1="100%" x2="100%" y2="0"/&gt;
+&lt;/svg&gt;
+
+&lt;svg id='svgc' style='width: 10%; height: 20px;'&gt;
+    &lt;line x1="0" y1="0" x2="100%" y2="100%"/&gt;
+&lt;/svg&gt;
+
+&lt;svg id='svgd' style='width: 10%; height: 20px;'&gt;
+    &lt;line x1="0" y1="100%" x2="100%" y2="0"/&gt;
+&lt;/svg&gt;
+
+&lt;svg id='svgf' style='width: 10%; height: 20px;'&gt;
+    &lt;line x1="0" y1="0" x2="100%" y2="100%"/&gt;
+&lt;/svg&gt;
+&lt;svg id='svgg' style='width: 10%; height: 20px;'&gt;
+    &lt;line x1="0" y1="100%" x2="100%" y2="0"/&gt;
+&lt;/svg&gt;
+
+&lt;svg id='svgh' style='width: 10%; height: 20px;'&gt;
+    &lt;line x1="0" y1="0" x2="100%" y2="100%"/&gt;
+&lt;/svg&gt;
+&lt;svg id='svgi' style='width: 10%; height: 20px;'&gt;
+    &lt;line x1="0" y1="100%" x2="100%" y2="0"/&gt;
+&lt;/svg&gt;
+
+&lt;svg id='svgj' style='width: 10%; height: 20px;'&gt;
+    &lt;line x1="0" y1="0" x2="100%" y2="100%"/&gt;
+&lt;/svg&gt;
+&lt;/aside&gt;
+
+&lt;summary class='fourth'&gt;&lt;div&gt;My title&lt;/div&gt;&lt;div&gt;text&lt;/div&gt;&lt;div&gt;attribute:&lt;/div&gt;&lt;div&gt; name content&lt;/div&gt;&lt;div&gt;attribute:&lt;/div&gt;&lt;div&gt;href&lt;/div&gt;&lt;div&gt;attribute:&lt;/div&gt;&lt;div&gt;href&lt;/div&gt;&lt;div&gt;h1&lt;/div&gt;&lt;div&gt;ul&lt;/div&gt;&lt;div&gt;attributes:&lt;/div&gt;&lt;div&gt;src alt&lt;/div&gt;&lt;/summary&gt;
+&lt;summary class='fifth'&gt;&lt;div&gt;&amp;ltimg&gt; attrib:&lt;/div&gt;&lt;div&gt;src='' alt=''&lt;/div&gt;&lt;/summary&gt;
+&lt;/main&gt;</textarea><div><style>summary {display: flex; justify-content: space-around; font-size:1.15em;} 
+summary div {width:25%; height:50px;border: 10px solid red; text-align:center; margin:5px;} 
+.three {display:flex; justify-content:space-between;width:100%; height:50px; margin:0;} 
+.three div {margin-left:10px;} 
+.fourth {display:flex; margin-left:15px; padding-top:5px;} 
+fourth div {margin-left:10px; margin-top:10;  } 
+.fifth {display:flex; justify-content:end;}
+.fifth div {width:150px; padding-top:45px; margin:15px;}
+svg {stroke:rgb(255,0,0); stroke-width:10px; margin-top: 0;}
+#svg1 {margin-left:20%; width:20%; height:20%; stroke-width:10px; stroke:rgb(255,0,0);}
+#svg2 {margin-right:20%; width:20%; height:20%;}
+
+#between3and4 {margin-top:25px;}
+
+aside {display:flex; justify-content: space-around; }
+</style>
+
+<main>
+<summary><div>document window root</div></summary>
+
+<aside>
+<svg id="svg1" style="width: 20%; height: 20px;">
+    <line x1="0" y1="100%" x2="100%" y2="0"></line>
+</svg>
+
+<svg id="svg2" style="width: 20%; height: 20px;">
+    <line x1="0" y1="0" x2="100%" y2="100%"></line>
+</svg></aside>
+
+<summary><div>Head</div><div>Body</div></summary>
+
+<aside>
+<svg id="svg3" style="width: 20%; height: 20px;">
+    <line x1="0" y1="100%" x2="100%" y2="0"></line>
+</svg>
+
+<svg id="svg4" style="width: 20%; height: 20px;">
+    <line x1="0" y1="0" x2="100%" y2="100%"></line>
+</svg>
+
+<svg id="svg5" style="width: 20%; height: 20px;">
+    <line x1="0" y1="100%" x2="100%" y2="0"></line>
+</svg>
+
+<svg id="svg6" style="width: 20%; height: 20px;">
+    <line x1="0" y1="0" x2="100%" y2="100%"></line>
+</svg>
+</aside>
+
+<summary class="three"><div>title</div><div>meta</div><div>link</div><div>&lt;a&gt; tag</div><div>main</div><div>img</div></summary>
+
+<aside id="between3and4">
+<svg id="svg7" style="width: 10%; height: 20px;">
+    <line x1="0" y1="100%" x2="100%" y2="0"></line>
+</svg>
+
+<svg id="svg8" style="width: 10%; height: 20px;">
+    <line x1="0" y1="0" x2="100%" y2="100%"></line>
+</svg>
+
+<svg id="svg9" style="width: 10%; height: 20px;">
+    <line x1="0" y1="100%" x2="100%" y2="0"></line>
+</svg>
+
+<svg id="svga" style="width: 10%; height: 20px;">
+    <line x1="0" y1="0" x2="100%" y2="100%"></line>
+</svg>
+<svg id="svgb" style="width: 10%; height: 20px;">
+    <line x1="0" y1="100%" x2="100%" y2="0"></line>
+</svg>
+
+<svg id="svgc" style="width: 10%; height: 20px;">
+    <line x1="0" y1="0" x2="100%" y2="100%"></line>
+</svg>
+
+<svg id="svgd" style="width: 10%; height: 20px;">
+    <line x1="0" y1="100%" x2="100%" y2="0"></line>
+</svg>
+
+<svg id="svgf" style="width: 10%; height: 20px;">
+    <line x1="0" y1="0" x2="100%" y2="100%"></line>
+</svg>
+<svg id="svgg" style="width: 10%; height: 20px;">
+    <line x1="0" y1="100%" x2="100%" y2="0"></line>
+</svg>
+
+<svg id="svgh" style="width: 10%; height: 20px;">
+    <line x1="0" y1="0" x2="100%" y2="100%"></line>
+</svg>
+<svg id="svgi" style="width: 10%; height: 20px;">
+    <line x1="0" y1="100%" x2="100%" y2="0"></line>
+</svg>
+
+<svg id="svgj" style="width: 10%; height: 20px;">
+    <line x1="0" y1="0" x2="100%" y2="100%"></line>
+</svg>
+</aside>
+
+<summary class="fourth"><div>My title</div><div>text</div><div>attribute:</div><div> name content</div><div>attribute:</div><div>href</div><div>attribute:</div><div>href</div><div>h1</div><div>ul</div><div>attributes:</div><div>src alt</div></summary>
+<summary class="fifth"><div>&lt;img&gt; attrib:</div><div>src='' alt=''</div></summary>
+</main></div></span></div><p style="margin: 0.75em;"></p><div id="b12">[12]:&nbsp;<span class="box1"><input type="button" value="go" onclick="button_flash(go_block,event,this);" class=""><input type="button" value="txt" onclick="show_block(event,this);" class=""><input type="button" value="clr" onclick="clr_block(event,this);" class=""><input type="button" value="-" onclick="vis_block(event,this);"><br><textarea id="b12_in" class="box0" rows="1" cols="110" style="height: 26px;"></textarea><div><textarea id="b0_val" class="box2" rows="1" cols="110" style="height: 26px;"></textarea></div></span></div><p style="margin: 0.75em;"></p><div id="b13">[13]:&nbsp;<span class="box1"><input type="button" value="go" onclick="button_flash(go_block,event,this);" class=""><input type="button" value="txt" onclick="show_block(event,this);" class=""><input type="button" value="clr" onclick="clr_block(event,this);" class=""><input type="button" value="-" onclick="vis_block(event,this);"><br><textarea id="b13_in" class="box0" rows="1" cols="110" style="height: 26px;"></textarea><div><textarea id="b0_val" class="box2" rows="1" cols="110" style="height: 26px;"></textarea></div></span></div><p style="margin: 0.75em;"></p><div id="b14">[14]:&nbsp;<span class="box1"><input type="button" value="go" onclick="button_flash(go_block,event,this);" class="hidden"><input type="button" value="txt" onclick="show_block(event,this);" class="hidden"><input type="button" value="clr" onclick="clr_block(event,this);" class="hidden"><input type="button" value="+" onclick="vis_block(event,this);"><br><textarea id="b14_in" class="hidden" rows="1" cols="110" style="height: auto;">&lt;main&gt;&lt;header&gt;&lt;h2&gt;Web Fundamentals&lt;/h2&gt;&lt;h1&gt;AJAX&lt;/h1&gt;&lt;p&gt;What is it?&lt;/p&gt;&lt;p&gt;is it a Greek mythological hero?&lt;/p&gt;&lt;p&gt;is it a soccer team from Netherlands?&lt;/p&gt;&lt;p&gt;&lt;/p&gt;&lt;/header&gt;
+
+&lt;p&gt;Asynchronous JavaScript And XML
+&lt;/p&gt;&lt;p&gt;Ajax model, web applications are able to make quick, incremental updates to the user interface without reloading the entire browser page. This makes the application faster and more responsive to user actions.
+&lt;/p&gt;&lt;p&gt;However, instead of XML modern websites utilize JSON format.
+&lt;/p&gt;&lt;p&gt;AJAJ? (hard to pronounce....)
+&lt;/p&gt;&lt;p&gt;Purpose (of XML/JSON):&lt;p style="padding-left:6%;"&gt;Its primary purpose is to facilitate the sharing of data across different systems, particularly systems connected via the Internet.&lt;/p&gt;
+&lt;footer&gt;source: https://developer.mozilla.org/en-US/docs/Web/Guide/AJAX&lt;/footer&gt;
+&lt;/main&gt;
+</textarea><div><main><header><h2>Web Fundamentals</h2><h1>AJAX</h1><p>What is it?</p><p>is it a Greek mythological hero?</p><p>is it a soccer team from Netherlands?</p><p></p></header>
+
+<p>Asynchronous JavaScript And XML
+</p><p>Ajax model, web applications are able to make quick, incremental updates to the user interface without reloading the entire browser page. This makes the application faster and more responsive to user actions.
+</p><p>However, instead of XML modern websites utilize JSON format.
+</p><p>AJAJ? (hard to pronounce....)
+</p><p>Purpose (of XML/JSON):</p><p style="padding-left:6%;">Its primary purpose is to facilitate the sharing of data across different systems, particularly systems connected via the Internet.</p>
+<footer>source: https://developer.mozilla.org/en-US/docs/Web/Guide/AJAX</footer>
+</main>
+</div></span></div><p style="margin: 0.75em;"></p><div id="b15">[15]:&nbsp;<span class="box1"><input type="button" value="go" onclick="button_flash(go_block,event,this);" class="hidden"><input type="button" value="txt" onclick="show_block(event,this);" class="hidden"><input type="button" value="clr" onclick="clr_block(event,this);" class="hidden"><input type="button" value="+" onclick="vis_block(event,this);"><br><textarea id="b15_in" class="hidden" rows="1" cols="110" style="height: auto;">&lt;main&gt;&lt;header&gt;&lt;h2&gt;Web Fundamentals&lt;/h2&gt;&lt;h1&gt;How the Web works&lt;/h1&gt;&lt;h2&gt;So what happens, exactly when you type a URL into your browser?&lt;/h2&gt;&lt;p&gt;where does the info go?&lt;/p&gt;&lt;p&gt;How does data get there?&lt;/p&gt;&lt;p&gt;?&lt;/p&gt;&lt;p&gt;&lt;/p&gt;&lt;/header&gt;
+&lt;p&gt;The browser goes to the DNS server, and finds the numeric address of the server that the website lives on.
+&lt;/p&gt;
+&lt;p&gt;The browser sends and HTTP request message to the server, asking it to send a copy of the website to the client using the TCP/IP protocol.
+&lt;/p&gt;&lt;p&gt;If the server approves the client's request, the server sends a "200 OK" message which means "success!!", and then starts sending the website's files to the browser as a series of small chunks called &lt;em&gt;data packets&lt;/em&gt;
+&lt;/p&gt;&lt;p&gt;The browser assembles the small chunks into a complete web page and renders it.
+&lt;footer&gt;source: https://developer.mozilla.org/en-US/docs/Learn/Getting_started_with_the_web/How_the_Web_works&lt;p&gt;
+&lt;/footer&gt;&lt;p&gt;
+&lt;/p&gt;&lt;p&gt;
+
+&lt;/p&gt;
+&lt;/main&gt;
+</textarea><div><main><header><h2>Web Fundamentals</h2><h1>How the Web works</h1><h2>So what happens, exactly when you type a URL into your browser?</h2><p>where does the info go?</p><p>How does data get there?</p><p>?</p><p></p></header>
+<p>The browser goes to the DNS server, and finds the numeric address of the server that the website lives on.
+</p>
+<p>The browser sends and HTTP request message to the server, asking it to send a copy of the website to the client using the TCP/IP protocol.
+</p><p>If the server approves the client's request, the server sends a "200 OK" message which means "success!!", and then starts sending the website's files to the browser as a series of small chunks called <em>data packets</em>
+</p><p>The browser assembles the small chunks into a complete web page and renders it.
+</p><footer>source: https://developer.mozilla.org/en-US/docs/Learn/Getting_started_with_the_web/How_the_Web_works<p>
+</p></footer><p>
+</p><p>
+
+</p>
+</main>
+</div></span></div><p style="margin: 0.75em;"></p><div id="b16">[16]:&nbsp;<span class="box1"><input type="button" value="go" onclick="button_flash(go_block,event,this);" class="hidden"><input type="button" value="txt" onclick="show_block(event,this);" class="hidden"><input type="button" value="clr" onclick="clr_block(event,this);" class="hidden"><input type="button" value="+" onclick="vis_block(event,this);"><br><textarea id="b16_in" class="hidden" rows="1" cols="110" style="height: auto;">&lt;main&gt;&lt;header&gt;&lt;h2&gt;Web Fundamentals&lt;/h2&gt;&lt;h1&gt;How the client parse the response?&lt;/h1&gt;&lt;p&gt;What is "parsing"?&lt;/p&gt;&lt;p&gt;what is response exactly?&lt;/p&gt;&lt;p&gt;why the order is important?&lt;/p&gt;&lt;p&gt;&lt;/p&gt;&lt;/header&gt;
+&lt;p&gt;The response with the HTML file contain link elements referencing CSS stylesheet and script elements referencing external JavaScript scripts
+&lt;/p&gt;&lt;p&gt;HTML file is parsed first and link as well as script elements are in memory.
+&lt;/p&gt;&lt;p&gt;The browser send a request for the stylesheet and scripts referenced by the links
+&lt;/p&gt;&lt;p&gt;The browser parses those resources (stylesheets and scripts)
+&lt;/p&gt;&lt;p&gt;The browser generates an in-memory DOM tree from the parsed HTML, generates an in-memory CSSOM structure from the parsed CSS, and compiles and executes the parsed JavaScript.
+&lt;/p&gt;&lt;p&gt;As the browser builds the DOM tree and applies the styles from the CSSOM tree and executes the JavaScript, a visual representation of the page is painted to the screen, and the user sees the page content and can begin to interact with it.&lt;/p&gt;
+&lt;footer&gt;source: https://developer.mozilla.org/en-US/docs/Learn/Getting_started_with_the_web/How_the_Web_works&lt;/footer&gt;
+&lt;/main&gt;
+</textarea><div><main><header><h2>Web Fundamentals</h2><h1>How the client parse the response?</h1><p>What is "parsing"?</p><p>what is response exactly?</p><p>why the order is important?</p><p></p></header>
+<p>The response with the HTML file contain link elements referencing CSS stylesheet and script elements referencing external JavaScript scripts
+</p><p>HTML file is parsed first and link as well as script elements are in memory.
+</p><p>The browser send a request for the stylesheet and scripts referenced by the links
+</p><p>The browser parses those resources (stylesheets and scripts)
+</p><p>The browser generates an in-memory DOM tree from the parsed HTML, generates an in-memory CSSOM structure from the parsed CSS, and compiles and executes the parsed JavaScript.
+</p><p>As the browser builds the DOM tree and applies the styles from the CSSOM tree and executes the JavaScript, a visual representation of the page is painted to the screen, and the user sees the page content and can begin to interact with it.</p>
+<footer>source: https://developer.mozilla.org/en-US/docs/Learn/Getting_started_with_the_web/How_the_Web_works</footer>
+</main>
+</div></span></div><p style="margin: 0.75em;"></p><div id="b17">[17]:&nbsp;<span class="box1"><input type="button" value="go" onclick="button_flash(go_block,event,this);" class="hidden"><input type="button" value="txt" onclick="show_block(event,this);" class="hidden"><input type="button" value="clr" onclick="clr_block(event,this);" class="hidden"><input type="button" value="+" onclick="vis_block(event,this);"><br><textarea id="b17_in" class="hidden" rows="1" cols="110" style="height: auto;">&lt;main&gt;&lt;header&gt;&lt;h2&gt;Web Fundamentals:&lt;/h2&gt;&lt;h1&gt;HTTP&lt;/h1&gt;&lt;p&gt;What is a protocol?&lt;/p&gt;&lt;p&gt;what is hypertext?&lt;/p&gt;&lt;p&gt;hyperlink?&lt;/p&gt;&lt;p&gt;&lt;/p&gt;&lt;/header&gt;
+&lt;p&gt;HTTP is a protocol for fetching resources such as HTML documents.
+&lt;/p&gt;&lt;p&gt;A complete document is reconstructed from the different sub-documents fetched: text, layout description, images, videos, scripts, and more.
+&lt;/p&gt;&lt;p&gt;HTTP is simple and human readable.
+&lt;/p&gt;&lt;p&gt;HTTP is extensible: new functionality can even be introduced by a simple agreement between a client and a server about a new header's semantics.
+&lt;/p&gt;&lt;p&gt;HTTP is stateless, but not sesionless.
+&lt;/p&gt;&lt;p&gt;STATELESS: there is no link between two requests being successively carried out on the same connection. 
+&lt;/p&gt;&lt;p&gt;HTTP Cookies are added to the workflow, allowing session creation on each HTTP request to share the same context, or the same state: shopping cart or basket.
+&lt;/p&gt;&lt;p&gt;Before a client and server can exchange an HTTP request/response pair, they must establish a TCP connection, a process which requires several &lt;b&gt;&lt;em&gt;round-trips&lt;/em&gt;&lt;/b&gt;. 
+&lt;/p&gt;&lt;p class="tooltip"&gt;Caching:&lt;span class="tooltiptext"&gt; is a technique that stores a copy of a given resource and serves it back when requested. When a web cache has a requested resource in its store, it intercepts the request and returns a copy of the stored resource instead of re-downloading the resource from the originating server.&lt;/span&gt; &lt;/p&gt;
+&lt;p class="tooltip"&gt;Protocol &lt;span class="tooltiptext"&gt;is a set of rules that defines a format. It is a system of rules that define how data is exchanged within or between computers. Communications require agreement on the format of the data that is being exchanged.&lt;/span&gt;&lt;/p&gt;
+&lt;footer&gt;sources: https://developer.mozilla.org/en-US/docs/Web/Guide/AJAX
+https://developer.mozilla.org/en-US/docs/Glossary/Protocol
+https://developer.mozilla.org/en-US/docs/Web/HTTP/Overview
+https://developer.mozilla.org/en-US/docs/Web/HTTP/Overview
+https://developer.mozilla.org/en-US/docs/Web/HTTP/Caching&lt;/footer&gt;&lt;/main&gt;
+
+</textarea><div><main><header><h2>Web Fundamentals:</h2><h1>HTTP</h1><p>What is a protocol?</p><p>what is hypertext?</p><p>hyperlink?</p><p></p></header>
+<p>HTTP is a protocol for fetching resources such as HTML documents.
+</p><p>A complete document is reconstructed from the different sub-documents fetched: text, layout description, images, videos, scripts, and more.
+</p><p>HTTP is simple and human readable.
+</p><p>HTTP is extensible: new functionality can even be introduced by a simple agreement between a client and a server about a new header's semantics.
+</p><p>HTTP is stateless, but not sesionless.
+</p><p>STATELESS: there is no link between two requests being successively carried out on the same connection. 
+</p><p>HTTP Cookies are added to the workflow, allowing session creation on each HTTP request to share the same context, or the same state: shopping cart or basket.
+</p><p>Before a client and server can exchange an HTTP request/response pair, they must establish a TCP connection, a process which requires several <b><em>round-trips</em></b>. 
+</p><p class="tooltip">Caching:<span class="tooltiptext"> is a technique that stores a copy of a given resource and serves it back when requested. When a web cache has a requested resource in its store, it intercepts the request and returns a copy of the stored resource instead of re-downloading the resource from the originating server.</span> </p>
+<p class="tooltip">Protocol <span class="tooltiptext">is a set of rules that defines a format. It is a system of rules that define how data is exchanged within or between computers. Communications require agreement on the format of the data that is being exchanged.</span></p>
+<footer>sources: https://developer.mozilla.org/en-US/docs/Web/Guide/AJAX
+https://developer.mozilla.org/en-US/docs/Glossary/Protocol
+https://developer.mozilla.org/en-US/docs/Web/HTTP/Overview
+https://developer.mozilla.org/en-US/docs/Web/HTTP/Overview
+https://developer.mozilla.org/en-US/docs/Web/HTTP/Caching</footer></main>
+
+</div></span></div><p style="margin: 0.75em;"></p><div id="b18">[18]:&nbsp;<span class="box1"><input type="button" value="go" onclick="button_flash(go_block,event,this);" class="hidden"><input type="button" value="txt" onclick="show_block(event,this);" class="hidden"><input type="button" value="clr" onclick="clr_block(event,this);" class="hidden"><input type="button" value="+" onclick="vis_block(event,this);"><br><textarea id="b18_in" class="hidden" rows="1" cols="110" style="height: auto;">12.13.2021: create a web page counting number of clicks to a multiple choice question</textarea><div><textarea id="b15_val" class="box2" rows="1" cols="110" style="height: 26px;"></textarea></div></span></div><p style="margin: 0.75em;"></p><div id="b19">[19]:&nbsp;<span class="box1"><input type="button" value="go" onclick="button_flash(go_block,event,this);" class="hidden"><input type="button" value="txt" onclick="show_block(event,this);" class="hidden"><input type="button" value="clr" onclick="clr_block(event,this);" class="hidden"><input type="button" value="+" onclick="vis_block(event,this);"><br><textarea id="b19_in" class="hidden" rows="1" cols="110" style="height: auto;">&lt;main&gt;&lt;header&gt;&lt;h2&gt;Web Fundamentals:&lt;/h2&gt;&lt;h1&gt;HTTP Messages&lt;/h1&gt;&lt;p&gt;What are HTTP actions?&lt;/p&gt;&lt;p&gt;what are request/response objects?&lt;/p&gt;&lt;p&gt;what does CRUD stand for?&lt;/p&gt;&lt;p&gt;CRUD vs REST?&lt;/p&gt;&lt;/header&gt;
+&lt;p&gt;
+&lt;/p&gt;Request Object: &lt;img src="https://developer.mozilla.org/en-US/docs/Web/HTTP/Overview/http_request.png"&gt;https://developer.mozilla.org/en-US/docs/Web/HTTP/Overview/http_request.png&lt;p&gt;
+&lt;/p&gt;&lt;p&gt;
+&lt;/p&gt;&lt;p&gt;
+&lt;/p&gt;&lt;p&gt;
+&lt;/p&gt;&lt;p&gt;
+&lt;/p&gt;&lt;p class="tooltip"&gt;PROTOCOL : &lt;span class="tooltiptext"&gt;is a set of rules that defines a format. It is a system of rules that define how data is exchanged within or between computers. Communications require agreement on the format of the data that is being exchanged.&lt;/span&gt;&lt;/p&gt;
+&lt;footer&gt;source: https://developer.mozilla.org/en-US/docs/Web/Guide/AJAX&lt;/footer&gt;
+&lt;/main&gt;
+https://developer.mozilla.org/en-US/docs/Glossary/Protocol
+https://developer.mozilla.org/en-US/docs/Web/HTTP/Overview
+
+
+</textarea><div>
+
+<main><header><h2>Web Fundamentals:</h2><h1>HTTP Messages</h1><p>What are HTTP actions?</p><p>what are request/response objects?</p><p>what does CRUD stand for?</p><p>CRUD vs REST?</p></header>
+<p>
+</p>Request Object: <img src="https://developer.mozilla.org/en-US/docs/Web/HTTP/Overview/http_request.png">https://developer.mozilla.org/en-US/docs/Web/HTTP/Overview/http_request.png<p>
+</p><p>
+</p><p>
+</p><p>
+</p><p>
+</p><p class="tooltip">PROTOCOL : <span class="tooltiptext">is a set of rules that defines a format. It is a system of rules that define how data is exchanged within or between computers. Communications require agreement on the format of the data that is being exchanged.</span></p>
+<footer>source: https://developer.mozilla.org/en-US/docs/Web/Guide/AJAX</footer>
+</main>
+https://developer.mozilla.org/en-US/docs/Glossary/Protocol
+https://developer.mozilla.org/en-US/docs/Web/HTTP/Overview
+
+
+</div></span></div><p style="margin: 0.75em;"></p><div id="b20">[20]:&nbsp;<span class="box1"><input type="button" value="go" onclick="button_flash(go_block,event,this);" class="hidden"><input type="button" value="txt" onclick="show_block(event,this);" class="hidden"><input type="button" value="clr" onclick="clr_block(event,this);" class="hidden"><input type="button" value="+" onclick="vis_block(event,this);"><br><textarea id="b20_in" class="hidden" rows="1" cols="110" style="height: auto;">&lt;style&gt;&lt;/style&gt;
+
+&lt;main&gt;&lt;header&gt;&lt;h2&gt;Web Fundamentals:&lt;/h2&gt;&lt;h1&gt;HTTP&lt;/h1&gt;&lt;p&gt;What is a protocol?&lt;/p&gt;&lt;p&gt;what is hypertext?&lt;/p&gt;&lt;p&gt;hyperlink?&lt;/p&gt;&lt;p&gt;&lt;/p&gt;&lt;/header&gt;
+&lt;p&gt;
+&lt;/p&gt;&lt;p&gt;
+&lt;/p&gt;&lt;p&gt;
+&lt;/p&gt;&lt;p&gt;
+&lt;/p&gt;&lt;p&gt;
+&lt;/p&gt;&lt;p&gt;
+&lt;/p&gt;&lt;p class="tooltip"&gt;PROTOCOL : &lt;span class="tooltiptext"&gt;is a set of rules that defines a format. It is a system of rules that define how data is exchanged within or between computers. Communications require agreement on the format of the data that is being exchanged.&lt;/span&gt;&lt;/p&gt;
+&lt;footer&gt;source: https://developer.mozilla.org/en-US/docs/Web/Guide/AJAX&lt;/footer&gt;
+&lt;/main&gt;
+https://developer.mozilla.org/en-US/docs/Glossary/Protocol
+https://developer.mozilla.org/en-US/docs/Web/HTTP/Overview
+
+
+</textarea><div></div></span></div><p style="margin: 0.75em;"></p><div id="b21">[21]:&nbsp;<span class="box1"><input type="button" value="go" onclick="button_flash(go_block,event,this);" class="hidden"><input type="button" value="txt" onclick="show_block(event,this);" class="hidden"><input type="button" value="clr" onclick="clr_block(event,this);" class="hidden"><input type="button" value="+" onclick="vis_block(event,this);"><br><textarea id="b21_in" class="hidden" rows="1" cols="110" style="height: auto;">https://developer.mozilla.org/en-US/docs/Glossary/AJAX
+&lt;style&gt;&lt;/style&gt;
+
+&lt;main&gt;&lt;header&gt;&lt;h2&gt;Web Fundamentals:&lt;/h2&gt;&lt;h1&gt;HTTP&lt;/h1&gt;&lt;p&gt;What is a protocol?&lt;/p&gt;&lt;p&gt;what is hypertext?&lt;/p&gt;&lt;p&gt;hyperlink?&lt;/p&gt;&lt;p&gt;&lt;/p&gt;&lt;/header&gt;
+&lt;p&gt;
+&lt;/p&gt;&lt;p&gt;
+&lt;/p&gt;&lt;p&gt;
+&lt;/p&gt;&lt;p&gt;
+&lt;/p&gt;&lt;p&gt;
+&lt;/p&gt;&lt;p&gt;
+&lt;/p&gt;&lt;p class="tooltip"&gt;PROTOCOL : &lt;span class="tooltiptext"&gt;is a set of rules that defines a format. It is a system of rules that define how data is exchanged within or between computers. Communications require agreement on the format of the data that is being exchanged.&lt;/span&gt;&lt;/p&gt;
+&lt;footer&gt;source: https://developer.mozilla.org/en-US/docs/Web/Guide/AJAX&lt;/footer&gt;
+&lt;/main&gt;
+https://developer.mozilla.org/en-US/docs/Glossary/Protocol
+https://developer.mozilla.org/en-US/docs/Web/HTTP/Overview
+
+
+
+</textarea><div></div></span></div><p style="margin: 0.75em;"></p><div id="b22">[22]:&nbsp;<span class="box1"><input type="button" value="go" onclick="button_flash(go_block,event,this);" class="hidden"><input type="button" value="txt" onclick="show_block(event,this);" class="hidden"><input type="button" value="clr" onclick="clr_block(event,this);" class="hidden"><input type="button" value="+" onclick="vis_block(event,this);"><br><textarea id="b22_in" class="hidden" rows="1" cols="110" style="height: auto;">&lt;main&gt;&lt;header&gt;&lt;h2&gt;Web Fundamentals:&lt;/h2&gt;&lt;h1&gt;HTTP Methods&lt;/h1&gt;&lt;p&gt;What Headers?&lt;/p&gt;&lt;p&gt;?&lt;/p&gt;&lt;p&gt;?&lt;/p&gt;&lt;p&gt;&lt;/p&gt;&lt;/header&gt;
+&lt;p&gt;Method: GET, POST, PUT, DELETE, &amp;c.
+&lt;/p&gt;&lt;p&gt;Headers: metadata about the request, including authorization tokens and content specifications
+&lt;/p&gt;&lt;p&gt;Body: Some data to be used by the server, from a form for instance
+&lt;/p&gt;&lt;p&gt;
+&lt;/p&gt;&lt;p&gt;
+&lt;/p&gt;&lt;p&gt;
+&lt;/p&gt;&lt;p class="tooltip"&gt;PROTOCOL : &lt;span class="tooltiptext"&gt;is a set of rules that defines a format. It is a system of rules that define how data is exchanged within or between computers. Communications require agreement on the format of the data that is being exchanged.&lt;/span&gt;&lt;/p&gt;
+&lt;footer&gt;source: https://developer.mozilla.org/en-US/docs/Web/Guide/AJAX&lt;/footer&gt;
+&lt;/main&gt;
+https://developer.mozilla.org/en-US/docs/Glossary/Protocol
+https://developer.mozilla.org/en-US/docs/Web/HTTP/Overview
+
+
+
+
+</textarea><div>
+<main><header><h2>Web Fundamentals:</h2><h1>HTTP Methods</h1><p>What Headers?</p><p>?</p><p>?</p><p></p></header>
+<p>Method: GET, POST, PUT, DELETE, &amp;c.
+</p><p>Headers: metadata about the request, including authorization tokens and content specifications
+</p><p>Body: Some data to be used by the server, from a form for instance
+</p><p>
+</p><p>
+</p><p>
+</p><p class="tooltip">PROTOCOL : <span class="tooltiptext">is a set of rules that defines a format. It is a system of rules that define how data is exchanged within or between computers. Communications require agreement on the format of the data that is being exchanged.</span></p>
+<footer>source: https://developer.mozilla.org/en-US/docs/Web/Guide/AJAX</footer>
+</main>
+https://developer.mozilla.org/en-US/docs/Glossary/Protocol
+https://developer.mozilla.org/en-US/docs/Web/HTTP/Overview
+
+
+
+
+</div></span></div><p style="margin: 0.75em;"></p><div id="b23">[23]:&nbsp;<span class="box1"><input type="button" value="go" onclick="button_flash(go_block,event,this);" class="hidden"><input type="button" value="txt" onclick="show_block(event,this);" class="hidden"><input type="button" value="clr" onclick="clr_block(event,this);" class="hidden"><input type="button" value="+" onclick="vis_block(event,this);"><br><textarea id="b23_in" class="hidden" rows="1" cols="110" style="height: auto;">toolchain</textarea><div></div></span></div><p style="margin: 0.75em;"></p><div id="b24">[24]:&nbsp;<span class="box1"><input type="button" value="go" onclick="button_flash(go_block,event,this);" class="hidden"><input type="button" value="txt" onclick="show_block(event,this);" class="hidden"><input type="button" value="clr" onclick="clr_block(event,this);" class="hidden"><input type="button" value="+" onclick="vis_block(event,this);"><br><textarea id="b24_in" class="hidden" rows="1" cols="110" style="height: auto;">&lt;main&gt;&lt;header&gt;&lt;h2&gt;Web Development:&lt;/h2&gt;&lt;h1&gt;Toolchain&lt;/h1&gt;&lt;p&gt;What is fullstack?&lt;/p&gt;&lt;p&gt;what is CLI?, command line?, termina?&lt;/p&gt;&lt;p&gt;what is UI?&lt;/p&gt;&lt;p&gt;&lt;/p&gt;&lt;/header&gt;
+&lt;p&gt;Tools
+&lt;/p&gt;&lt;li&gt;Git&lt;/li&gt;&lt;li&gt;
+GitHub&lt;/li&gt;&lt;li&gt;
+VSCode&lt;/li&gt;
+&lt;p&gt;Tech Stack
+&lt;/p&gt;&lt;li&gt;MongoDB&lt;/li&gt;&lt;li&gt;
+Express&lt;/li&gt;&lt;li&gt;
+React&lt;/li&gt;&lt;li&gt; 
+Node&lt;/li&gt;
+&lt;p&gt;Workflow
+&lt;/p&gt;&lt;li&gt;Agile-ish&lt;/li&gt;&lt;li&gt;
+Git Flow&lt;/li&gt;
+&lt;/p&gt;
+&lt;p class="tooltip"&gt;&lt;span class="tooltiptext"&gt;&lt;/span&gt;&lt;/p&gt;
+&lt;/main&gt;
+
+</textarea><div><main><header><h2>Web Development:</h2><h1>Toolchain</h1><p>What is fullstack?</p><p>what is CLI?, command line?, termina?</p><p>what is UI?</p><p></p></header>
+<p>Tools
+</p><li>Git</li><li>
+GitHub</li><li>
+VSCode</li>
+<p>Tech Stack
+</p><li>MongoDB</li><li>
+Express</li><li>
+React</li><li> 
+Node</li>
+<p>Workflow
+</p><li>Agile-ish</li><li>
+Git Flow</li>
+<p></p>
+<p class="tooltip"><span class="tooltiptext"></span></p>
+</main>
+
+</div></span></div><p style="margin: 0.75em;"></p><div id="b25">[25]:&nbsp;<span class="box1"><input type="button" value="go" onclick="button_flash(go_block,event,this);" class=""><input type="button" value="txt" onclick="show_block(event,this);"><input type="button" value="clr" onclick="clr_block(event,this);"><input type="button" value="-" onclick="vis_block(event,this);"><br><textarea id="b25_in" class="box0" rows="1" cols="110" style="height: 26px;">Using Git</textarea><div></div></span></div><p style="margin: 0.75em;"></p><div id="b26">[26]:&nbsp;<span class="box1"><input type="button" value="go" onclick="button_flash(go_block,event,this);" class=""><input type="button" value="txt" onclick="show_block(event,this);"><input type="button" value="clr" onclick="clr_block(event,this);"><input type="button" value="-" onclick="vis_block(event,this);"><br><textarea id="b26_in" class="box0" rows="1" cols="110" style="height: 26px;">Q &amp; A</textarea><div></div></span></div><p style="margin: 0.75em;"></p><div id="b27">[27]:&nbsp;<span class="box1"><input type="button" value="go" onclick="button_flash(go_block,event,this);" class="hidden"><input type="button" value="txt" onclick="show_block(event,this);" class="hidden"><input type="button" value="clr" onclick="clr_block(event,this);" class="hidden"><input type="button" value="+" onclick="vis_block(event,this);"><br><textarea id="b27_in" class="hidden" rows="1" cols="110" style="height: auto;">&lt;main&gt;&lt;header&gt;&lt;h2&gt;Web Development:&lt;/h2&gt;&lt;h1&gt;Assignments: Individual&lt;/h1&gt;&lt;/header&gt;
+&lt;p&gt;Initialize a git repo and publish it to GitHub. If the repository is private, make sure to add me as a contributor (@lopeznelson)
+&lt;/p&gt;&lt;p&gt;Create a simple web page that responds to user input, updates the styles or elements in the DOM, and makes a network call. The app should use the response from the network call to update some element of the page
+&lt;/p&gt;&lt;p&gt;You can refer to the tag `week1` in the demo repo
+&lt;/p&gt;&lt;p&gt;
+&lt;header&gt;&lt;h2&gt;Web Development:&lt;/h2&gt;&lt;h1&gt;Assignments: Group&lt;/h1&gt;&lt;/header&gt;
+&lt;p&gt;set up your group git repository and push it to GitHub
+&lt;/p&gt;&lt;p&gt;clone the repo to each student’s development device
+&lt;/p&gt;&lt;p&gt;create a README for your app
+Submit the link to your group repository
+Make me a contributor (@lopeznelson)
+&lt;/main&gt;</textarea><div><main><header><h2>Web Development:</h2><h1>Assignments: Individual</h1></header>
+<p>Initialize a git repo and publish it to GitHub. If the repository is private, make sure to add me as a contributor (@lopeznelson)
+</p><p>Create a simple web page that responds to user input, updates the styles or elements in the DOM, and makes a network call. The app should use the response from the network call to update some element of the page
+</p><p>You can refer to the tag `week1` in the demo repo
+</p><p>
+</p><header><h2>Web Development:</h2><h1>Assignments: Group</h1></header>
+<p>set up your group git repository and push it to GitHub
+</p><p>clone the repo to each student’s development device
+</p><p>create a README for your app
+Submit the link to your group repository
+Make me a contributor (@lopeznelson)
+</p></main></div></span></div><p style="margin: 0.75em;"></p><div id="b28">[28]:&nbsp;<span class="box1"><input type="button" value="go" onclick="button_flash(go_block,event,this);" class="hidden"><input type="button" value="txt" onclick="show_block(event,this);" class="hidden"><input type="button" value="clr" onclick="clr_block(event,this);" class="hidden"><input type="button" value="+" onclick="vis_block(event,this);"><br><textarea id="b28_in" class="hidden" rows="1" cols="110" style="height: auto;">Request
+An HTTP request is a message describing a resource to handle the request, the method of the request, and data that the server can use in processing the request
+Resource: the path that should handle the request (e.g. ‘/users?username=jimmy’)
+Method: GET, POST, PUT, DELETE, &amp;c.
+Headers: metadata about the request, including authorization tokens and content specifications
+Body: Some data to be used by the server, from a form for instance
+
+Response
+An HTTP Response is a message fulfilling a Request
+Status Code and Message: 200 Success, 404 Not Found, 502 Bad Gateway
+Headers: still metadata
+Body: Content for the requestor
+</textarea><div></div></span></div><p style="margin: 0.75em;"></p></div>
+
+<input type="button" value="go last" onclick="button_flash(golast_block,event,this);" class="">
+
+<span style="display:inline-block;width:.2em"></span>
+<input type="button" value="add" onclick="add_block(event,this);">
+
+<span style="display:inline-block;width:.2em"></span>
+<input type="button" value="go-add" onclick="button_flash(goadd_block,event,this);" class="">
+
+<span style="display:inline-block;width: .2em"></span>
+<input type="button" value="go all" onclick="button_flash(do_all,event,this);" class="">
+
+<span style="display:inline-block;width:15%;"></span>
+<input type="button" value="delete" onclick="deletelast_block(event,this);">
+
+<p style="height: 10em"></p>
+
+<script language="JavaScript" type="text/javascript">
+pagestartup();
+--></script>
+
+</body></html>
